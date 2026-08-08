@@ -264,6 +264,7 @@ p { margin: 0 0 14px; color: var(--ink-soft); }
   overflow: hidden;
   box-shadow: var(--shadow-l);
   background: var(--white);
+  aspect-ratio: 16/10.4;
 }
 .hero-figure img { width: 100%; height: 100%; object-fit: cover; }
 .hero-figure .cap {
@@ -275,7 +276,24 @@ p { margin: 0 0 14px; color: var(--ink-soft); }
   font-size: 12.5px;
   padding: 8px 12px;
   border-radius: var(--radius-s);
+  z-index: 3;
 }
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .9s ease;
+}
+.hero-slide.is-active { opacity: 1; z-index: 1; }
+.hero-figure .carousel-dots {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  margin-top: 0;
+  z-index: 3;
+}
+.hero-figure .carousel-dot { background: rgba(255,255,255,0.45); }
+.hero-figure .carousel-dot.is-active { background: var(--accent); }
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -289,7 +307,7 @@ p { margin: 0 0 14px; color: var(--ink-soft); }
 
 @media (max-width: 900px) {
   .hero .container { grid-template-columns: 1fr; }
-  .hero-figure { order: -1; aspect-ratio: 16/10; }
+  .hero-figure { order: -1; }
   .hero-stats { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -463,6 +481,20 @@ p { margin: 0 0 14px; color: var(--ink-soft); }
   object-fit: cover;
   margin: 0 auto 14px;
 }
+.team-avatar {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  background: var(--navy-700);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
 .team-card h3 { margin-bottom: 2px; font-size: 16.5px; }
 .team-card .role {
   display: block;
@@ -508,6 +540,98 @@ p { margin: 0 0 14px; color: var(--ink-soft); }
   margin-bottom: 10px;
 }
 .partner-card p { font-size: 14px; margin-bottom: 0; }
+
+/* ============================================================
+   Carousel — generic track (arrows + dots) used for testimonials
+   and team members, plus hero fade carousel.
+   ============================================================ */
+.carousel { position: relative; padding: 0 56px; }
+.carousel-viewport { overflow: hidden; }
+.carousel-track {
+  display: flex;
+  gap: 22px;
+  transition: transform .45s ease;
+}
+.carousel-item { flex: 0 0 100%; }
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-s);
+  transition: background .15s ease, color .15s ease;
+}
+.carousel-arrow:hover { background: var(--navy-900); color: var(--white); }
+.carousel-arrow svg { width: 20px; height: 20px; }
+.carousel-prev { left: 0; }
+.carousel-next { right: 0; }
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--line);
+  cursor: pointer;
+}
+.carousel-dot.is-active { background: var(--accent); width: 22px; border-radius: 4px; transition: width .2s ease; }
+
+@media (max-width: 720px) {
+  .carousel { padding: 0 8px; }
+  .carousel-arrow { width: 36px; height: 36px; position: static; transform: none; }
+}
+
+/* Team carousel: 3 per view desktop, 2 tablet, 1 mobile */
+.team-carousel .carousel-item { flex-basis: calc((100% - 2*22px)/3); }
+@media (max-width: 980px) {
+  .team-carousel .carousel-item { flex-basis: calc((100% - 22px)/2); }
+}
+@media (max-width: 640px) {
+  .team-carousel .carousel-item { flex-basis: 100%; }
+  .carousel { padding: 0 4px; }
+  .team-carousel .carousel-arrow { display: none; }
+}
+
+/* Testimonials */
+.testimonial-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 36px;
+  height: 100%;
+}
+.testimonial-stars { display: flex; gap: 3px; margin-bottom: 16px; color: var(--accent); }
+.testimonial-stars svg { width: 16px; height: 16px; }
+.testimonial-quote { font-size: 17px; color: var(--ink); line-height: 1.5; margin-bottom: 20px; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--ice-100);
+  color: var(--navy-800);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.testimonial-name { font-weight: 700; font-size: 14.5px; color: var(--ink); }
+.testimonial-role { font-size: 13px; color: var(--ink-mute); }
+@media (max-width: 720px) { .testimonial-card { padding: 26px; } .testimonial-quote { font-size: 15.5px; } }
 
 /* Why-us list */
 .why-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
