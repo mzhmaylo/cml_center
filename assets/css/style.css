@@ -804,6 +804,63 @@ p { margin: 0 0 14px; color: var(--ink-soft); }
 .page-hero .hero-lead { color: rgba(255,255,255,0.75); }
 .page-hero .container { max-width: 780px; }
 
+/* Cost calculator — deliberately plain: toggle buttons + a text result,
+   no gauges, animated counters or other gimmicks. */
+.calc-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 32px;
+  box-shadow: var(--shadow-s);
+  max-width: 640px;
+}
+.calc-row { display: grid; gap: 22px; margin-bottom: 24px; }
+.calc-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.calc-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.calc-option {
+  padding: 9px 16px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+.calc-option:hover { border-color: var(--navy-700); color: var(--navy-900); }
+.calc-option.is-active { background: var(--navy-900); border-color: var(--navy-900); color: var(--white); }
+.calc-hint { font-size: 13px; color: var(--ink-mute); margin: -10px 0 0; }
+.calc-result {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+.calc-result-label { font-size: 13px; color: var(--ink-mute); margin-bottom: 6px; }
+.calc-result-value { font-size: 30px; font-weight: 800; color: var(--navy-900); }
+.calc-result-sub { font-size: 13.5px; color: var(--ink-mute); margin-top: 4px; }
+@media (max-width: 640px) { .calc-card { padding: 24px; } }
+
+/* Pricing-conditions checklist */
+.check-item { display: flex; gap: 12px; align-items: flex-start; }
+.check-item .check-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--ice-100);
+  color: var(--navy-800);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.check-item .check-icon svg { width: 13px; height: 13px; }
+.check-item h3 { font-size: 15px; margin-bottom: 3px; }
+.check-item p { font-size: 13.5px; margin-bottom: 0; }
+
 /* Utility */
 .mt-0 { margin-top: 0; }
 .text-center { text-align: center; }

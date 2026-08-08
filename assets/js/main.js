@@ -1,4 +1,50 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Cost calculator: hours[type][complexity] x rate, no hidden logic.
+  var calcRoot = document.querySelector(".calc-card");
+  if (calcRoot) {
+    var RATE = 2600;
+    var HOURS = {
+      fasttrack: { simple: [8, 16], medium: [16, 30], hard: [30, 50] },
+      standard:  { simple: [30, 60], medium: [60, 150], hard: [150, 350] },
+      research:  { simple: [60, 120], medium: [120, 300], hard: [300, 600] }
+    };
+    var NOTES = {
+      fasttrack: "Fast Track: типовой договор, аванс, результат — презентация",
+      standard: "Стандартный расчётный проект с отчётом по результатам",
+      research: "НИР — научно-исследовательская работа, без НДС"
+    };
+    var typeWrap = calcRoot.querySelector("[data-calc-type]");
+    var complexityWrap = calcRoot.querySelector("[data-calc-complexity]");
+    var noteEl = calcRoot.querySelector("[data-calc-note]");
+    var minEl = calcRoot.querySelector("[data-calc-min]");
+    var maxEl = calcRoot.querySelector("[data-calc-max]");
+    var hoursEl = calcRoot.querySelector("[data-calc-hours]");
+
+    function fmt(n) { return n.toLocaleString("ru-RU"); }
+
+    function recalc() {
+      var type = typeWrap.querySelector(".is-active").getAttribute("data-value");
+      var complexity = complexityWrap.querySelector(".is-active").getAttribute("data-value");
+      var hours = HOURS[type][complexity];
+      noteEl.textContent = NOTES[type];
+      minEl.textContent = fmt(hours[0] * RATE);
+      maxEl.textContent = fmt(hours[1] * RATE);
+      hoursEl.textContent = "≈ " + hours[0] + "–" + hours[1] + " часов работы инженера";
+    }
+
+    [typeWrap, complexityWrap].forEach(function (wrap) {
+      wrap.querySelectorAll(".calc-option").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          wrap.querySelectorAll(".calc-option").forEach(function (b) { b.classList.remove("is-active"); });
+          btn.classList.add("is-active");
+          recalc();
+        });
+      });
+    });
+
+    recalc();
+  }
+
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".nav-links");
   if (toggle && nav) {
