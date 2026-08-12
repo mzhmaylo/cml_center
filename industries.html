@@ -15,8 +15,29 @@
     <nav class="nav-links" id="nav-links">
       <a href="index.html">Главная</a>
       <a href="about.html">О центре</a>
-      <a href="services.html">Услуги</a>
-      <a href="industries.html" aria-current="page">Отрасли</a>
+      <div class="nav-dropdown">
+        <a href="services.html" class="nav-dropdown-trigger">Услуги <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="services/calc.html">Расчёты и цифровые испытания</a>
+          <a href="services.html#optimize">Оптимизация конструкций</a>
+          <a href="services.html#design">Проектирование и промдизайн</a>
+          <a href="services.html#production">Сопровождение производства</a>
+          <a href="services.html#training">Обучение команды</a>
+          <a href="services.html" class="nav-dropdown-all">Все услуги &rarr;</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="industries.html" class="nav-dropdown-trigger" aria-current="page">Отрасли <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="industries/automotive.html">Автомобилестроение</a>
+          <a href="industries.html#machinery">Спецтехника и машиностроение</a>
+          <a href="industries.html#energy">Энергетика</a>
+          <a href="industries.html#oilgas">Нефтегаз</a>
+          <a href="industries.html#medical">Медтехника</a>
+          <a href="industries.html#instruments">Приборостроение</a>
+          <a href="industries.html" class="nav-dropdown-all">Все отрасли &rarr;</a>
+        </div>
+      </div>
       <a href="cases.html">Кейсы</a>
       <a href="cooperation.html">Сотрудничество</a>
       <a href="contacts.html">Контакты</a>
@@ -49,7 +70,10 @@
         <li style="margin-bottom:8px;">Прочность кузова, рамы, узлов подвески</li>
         <li style="margin-bottom:8px;">Тепловые расчёты двигателей и батарейных систем</li>
       </ul>
-      <a href="cases.html" class="btn btn-ghost">Смотреть кейс по отрасли</a>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="industries/automotive.html" class="btn btn-primary">Подробнее об отрасли</a>
+        <a href="cases.html" class="btn btn-ghost">Смотреть кейс по отрасли</a>
+      </div>
     </div>
     <div class="hero-figure" style="box-shadow:var(--shadow-m); aspect-ratio:4/3;">
       <img src="assets/img/render-automotive.jpg" alt="Автомобилестроение" loading="lazy">
